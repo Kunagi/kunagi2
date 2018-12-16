@@ -1,0 +1,18 @@
+{:deps {witek/bindscript    {:mvn/version "RELEASE"}
+        kunagi/domain-model {:mvn/version "RELEASE"}}
+
+ :paths ["src"]
+
+ :aliases
+ {:dev {:extra-paths ["target"]
+        :override-deps {kunagi/domain-model   {:local/root "../domain-model"}
+                        kunagi/facts-db       {:local/root "../facts-db"}
+                        witek/browser-headsup {:local/root "../browser-headsup"}
+                        witek/bindscript      {:local/root "../bindscript"}}
+        :extra-deps {com.bhauman/figwheel-main       {:mvn/version "RELEASE"}
+                     com.bhauman/rebel-readline-cljs {:mvn/version "RELEASE"}
+                     binaryage/devtools              {:mvn/version "RELEASE"}}
+        :main-opts ["--main" "figwheel.main" "--build" "dev"]}
+
+  :ancient {:main-opts ["-m" "deps-ancient.deps-ancient"]
+            :extra-deps {deps-ancient {:mvn/version "RELEASE"}}}}}
