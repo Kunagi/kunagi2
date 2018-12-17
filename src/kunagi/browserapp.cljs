@@ -1,4 +1,6 @@
-(ns kunagi.browserapp)
+(ns kunagi.browserapp
+  (:require
+   [apptoolkit.browserapp]))
 
 
 (.log js/console "Loading Kunagi")

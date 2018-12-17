@@ -1,4 +1,7 @@
-{:watch-dirs ["src"
+{:ring-handler kunagi.server/figwheel-handler
+ :watch-dirs ["src"
+              "../appkernel/src"
+              "../apptoolkit/src"
               "../domain-model/src"
               "../facts-db/src"]
  :open-file-command "emacsclient"
