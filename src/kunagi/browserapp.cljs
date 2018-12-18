@@ -1,10 +1,23 @@
-(ns kunagi.browserapp
+(ns ^:figwheel-hooks kunagi.browserapp
   (:require
-   [apptoolkit.browserapp]))
+   [appkernel.api :as app]
+   [apptoolkit.browserapp.api :as apptoolkit]
+   [material-desktop.desktop :as desktop]))
 
 
-(.log js/console "Loading Kunagi")
+(defn ^:after-load on-figwheel-after-load []
+  "Forwards the figwheel reload hook to `apptoolkit`."
+  (apptoolkit/on-figwheel-after-load))
 
 
-(defn -main []
-  (.log js/console "main"))
+(defn KunagiWorkarea
+  []
+  [:div "kunagi here"])
+
+
+(app/def-event-handler ::configure-desktop
+  :event :appkernel/initialized
+  :f (fn [db event]
+       (-> db
+           (assoc-in [::desktop/desktop :appbar :title] "Some Product Backlog")
+           (assoc-in [::desktop/desktop :workarea :components :kunagi] [[KunagiWorkarea]]))))
