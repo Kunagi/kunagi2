@@ -2,7 +2,9 @@
   (:require
    [appkernel.api :as app]
    [apptoolkit.browserapp.api :as apptoolkit]
-   [material-desktop.desktop :as desktop]))
+   [material-desktop.desktop :as desktop]
+
+   [kunagi.pbl.ui :as pbl-ui]))
 
 
 (defn ^:after-load on-figwheel-after-load []
@@ -18,6 +20,4 @@
 (app/def-event-handler ::configure-desktop
   :event :appkernel/initialized
   :f (fn [db event]
-       (-> db
-           (assoc-in [::desktop/desktop :appbar :title] "Some Product Backlog")
-           (assoc-in [::desktop/desktop :workarea :components :kunagi] [[KunagiWorkarea]]))))
+       (pbl-ui/install-page db)))
