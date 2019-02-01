@@ -8,4 +8,4 @@
   :open-file-command "emacsclient"
   :launch-js ["google-chrome" :open-url]}
 
-{:main kunagi.browserapp}
+{:main kunagi.figwheel-adapter}

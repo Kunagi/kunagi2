@@ -3,7 +3,7 @@
    [re-frame.core :as rf]
    ["@material-ui/icons" :as icons]
 
-   [appkernel.api :refer [def-event-handler]]
+   [appkernel.api :as app]
    [material-desktop.desktop :as desktop]
    [material-desktop.components :as mdc]))
 
@@ -30,9 +30,12 @@
   [:div#ProductBacklog
    [:div
     {:style {:margin-bottom "1rem"}}
-    [mdc/Button {:variant :contained}
-                [:> icons/Add]
-                "Product Backlog Item"]]
+    [mdc/Button {:variant :contained
+                 :on-click (fn [src]
+                             (tap> "click!")
+                             (rf/dispatch [:kunagi/pbl-item-created]))}
+                ;;[:> icons/Add]
+                "Add Product Backlog Item"]]
 
    ;; [:pre (str (:items @(rf/subscribe [::product-backlog])))]
    [mdc/CardsColumn
@@ -48,9 +51,11 @@
       (assoc-in [::desktop/desktop :workarea :components :kunagi] [[Workarea]])))
 
 
-(def-event-handler :page
-  :event :kunagi/product-backlog-page-opened
-  :f (fn [db event] (install-page db)))
+
+(app/def-event-handler ::install-page
+  :event :app/started
+  :f (fn [db event]
+       (install-page db)))
 
 
 ;;; subscriptions
