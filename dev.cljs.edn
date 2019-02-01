@@ -1,1 +1,11 @@
-{:main            kunagi.browserapp}
+^{:ring-handler kunagi.figwheel-adapter/ring-handler-for-figwheel
+  :watch-dirs ["src"
+               "../appkernel/src"
+               "../apptoolkit/src"
+               "../domain-model/src"
+               "../facts-db/src"
+               "../material-desktop/src"]
+  :open-file-command "emacsclient"
+  :launch-js ["google-chrome" :open-url]}
+
+{:main kunagi.browserapp}
