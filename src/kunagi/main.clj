@@ -2,7 +2,9 @@
   (:require
    [appkernel.api :as app]
 
-   [apptoolkit.http-server.mod]))
+   [apptoolkit.http-server.mod]
+
+   [kunagi.events]))
 
 
 (defn -main [port]

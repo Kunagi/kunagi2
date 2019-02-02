@@ -4,6 +4,7 @@
    ["@material-ui/icons" :as icons]
 
    [appkernel.api :as app]
+   [facts-db.api :as db]
    [material-desktop.desktop :as desktop]
    [material-desktop.components :as mdc]))
 
@@ -13,7 +14,7 @@
    [:> icons/ExpandMore
     {:style {:float :right}}]
    [mdc/Text
-    (str "#" (:num item) " " (:label item))]])
+    (:label item)]])
 
 
 (defn ProductBacklogItemContent [item]
@@ -31,13 +32,14 @@
    [:div
     {:style {:margin-bottom "1rem"}}
     [mdc/Button {:variant :contained
-                 :on-click (fn [src]
-                             (tap> "click!")
-                             (rf/dispatch [:kunagi/pbl-item-created]))}
+                 :on-click #(rf/dispatch [:kunagi/pbl-item-created {:pbl "some-random-pbl-id"
+                                                                    :item {:db/id (str (random-uuid))
+                                                                           :label "New item"}}])}
                 ;;[:> icons/Add]
                 "Add Product Backlog Item"]]
 
-   ;; [:pre (str (:items @(rf/subscribe [::product-backlog])))]
+   [:pre (str "pbl: " @(rf/subscribe [::product-backlog]))]
+   [:pre (str "sub: " @(rf/subscribe [:app/projection-db {:name :kunagi/pbl :args {}}]))]
    [mdc/CardsColumn
     {:cards (into (map (fn [item] [ProductBacklogItem item])
                        (:items @(rf/subscribe [::product-backlog]))))}]])
@@ -62,8 +64,7 @@
 
 (rf/reg-sub
  ::product-backlog
- (fn [db _]
-   {:items (mapv (fn [num]
-                   {:num num
-                    :label (str "Some random item " num)})
-                 (range 10))}))
+ (fn [_ _]
+   (rf/subscribe [:app/projection-db {:name :kunagi/pbl}]))
+ (fn [projection-db _]
+   (db/tree projection-db "some-random-pbl-id" {:items {}})))
