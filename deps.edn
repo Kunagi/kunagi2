@@ -3,20 +3,29 @@
  :paths ["src"]
 
  :aliases
- {:dev {:extra-paths ["target"
-                      "../facts-db/src"
-                      "../domain-model/src"]
-        :override-deps {kunagi/apptoolkit       {:local/root "../apptoolkit"}
-                        kunagi/appkernel        {:local/root "../appkernel"}
-                        kunagi/material-desktop {:local/root "../material-desktop"}
-                        kunagi/domain-model     {:local/root "../domain-model"}
-                        kunagi/facts-db         {:local/root "../facts-db"}
-                        witek/browser-headsup   {:local/root "../browser-headsup"}
-                        witek/bindscript        {:local/root "../bindscript"}}
+ {
+  :dev-deps {:override-deps {kunagi/apptoolkit       {:local/root "../apptoolkit"}
+                             kunagi/appkernel        {:local/root "../appkernel"}
+                             kunagi/material-desktop {:local/root "../material-desktop"}
+                             kunagi/facts-db         {:local/root "../facts-db"}
+                             witek/browser-headsup   {:local/root "../browser-headsup"}
+                             witek/bindscript        {:local/root "../bindscript"}}
+             :extra-deps {com.bhauman/figwheel-main  {:mvn/version "RELEASE"}}}
+
+  :dev {:extra-paths ["target"
+                      "../facts-db/src"]
         :extra-deps {com.bhauman/figwheel-main       {:mvn/version "RELEASE"}
                      com.bhauman/rebel-readline-cljs {:mvn/version "RELEASE"}
                      binaryage/devtools              {:mvn/version "RELEASE"}}
         :main-opts ["--main" "figwheel.main" "--build" "dev"]}
+
+  :build-js {:main-opts ["--main"          "figwheel.main"
+                         "--optimizations" "simple"
+                         "--build-once"    "prod"]
+             :extra-deps {com.bhauman/figwheel-main {:mvn/version "RELEASE"}}}
+
+  :run {:main-opts ["--main" "kunagi.main"]}
+
 
   :ancient {:main-opts ["-m" "deps-ancient.deps-ancient"]
             :extra-deps {deps-ancient {:mvn/version "RELEASE"}}}}}

@@ -1,0 +1,7 @@
+#!/bin/bash -e
+
+echo "Cleaning up target dir"
+rm -rf target/*
+
+echo "Compiling ClojureScript"
+clojure -A:dev-deps:build-js
