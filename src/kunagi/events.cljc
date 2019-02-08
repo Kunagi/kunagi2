@@ -3,6 +3,6 @@
    [appkernel.api :as app]))
 
 
-(app/def-eventmodel :kunagi/pbl-item-created)
+(app/def-event :kunagi/pbl-item-created)
 
-(app/def-eventmodel :kunagi/pbl-item-deleted)
+(app/def-event :kunagi/pbl-item-deleted)

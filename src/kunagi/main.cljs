@@ -4,6 +4,7 @@
    [material-desktop.desktop :as desktop]
 
    [kunagi.events]
+   [kunagi.commands]
    [kunagi.pbl.projector]
    [kunagi.pbl.ui :as pbl-ui]))
 

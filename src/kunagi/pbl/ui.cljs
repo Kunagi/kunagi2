@@ -32,7 +32,7 @@
       [mdc/ButtonsColumn
        :title "Actions"
        :buttons [{:text "Delete"
-                  :on-click (:on-delete pbl-item)}]]]]))
+                  :on-click (-> pbl-item :on :delete)}]]]]))
 
 
 (defn ProductBacklog []
@@ -43,7 +43,7 @@
      [:div
       {:style {:margin-bottom "1rem"}}
       [mdc/Button
-       :on-click (:add-item-on-click pbl)
+       :on-click (-> pbl :on :create-pbl-item)
        :text "Add Product Backlog Item"]]
      [expansion-panel-list/ExpansionPanelList
       {:panels (map (fn [pbl-item]
@@ -72,16 +72,27 @@
 ;;; subscriptions
 
 
+(defn assoc-handlers-to-pbl-item
+  [pbl-item]
+  (let [id (get pbl-item :db/id)]
+    (-> pbl-item
+        (assoc-in [:on :delete]
+                  #(rf/dispatch [:kunagi/delete-pbl-item {:item id}])))))
+
+
+(defn assoc-handlers-to-pbl
+  [pbl]
+  (-> pbl
+      (assoc-in [:on :create-pbl-item]
+                #(rf/dispatch [:kunagi/create-pbl-item]))
+      (update :items #(map assoc-handlers-to-pbl-item %))))
+
 (rf/reg-sub
  ::pbl
  (fn [_]
    (rf/subscribe [:app/projection-db {:name :kunagi/pbl}]))
  (fn [projection-db _]
    (let [pbl-id "some-random-pbl-id"]
+     ;; TODO tree-from-root
      (-> (db/tree projection-db pbl-id {:items {}})
-         (assoc :add-item-on-click
-                #(rf/dispatch [:kunagi/pbl-item-created
-                               {:pbl pbl-id
-                                :item {:db/id (str (random-uuid))
-                                       :label (str "New item " (.getTime (js/Date.)))
-                                       :description "Description for new Product Backlog item. Description for new Product Backlog item. Description for new Product Backlog item. Description for new Product Backlog item. Description for new Product Backlog item. "}}]))))))
+         (assoc-handlers-to-pbl)))))
