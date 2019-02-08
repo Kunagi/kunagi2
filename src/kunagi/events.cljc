@@ -4,3 +4,5 @@
 
 
 (app/def-eventmodel :kunagi/pbl-item-created)
+
+(app/def-eventmodel :kunagi/pbl-item-deleted)
