@@ -1,0 +1,80 @@
+#!/bin/bash -e
+
+WITH_PUSH="yes"
+
+while getopts ":r" opt; do
+    case $opt in
+        r)
+            WITH_PUSH=""
+            echo "-r was triggered!" >&2
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            ;;
+    esac
+done
+
+
+COLOR_ACCENT='\033[1;34m'
+COLOR_ERROR='\033[0;31m'
+COLOR_STATUS='\033[0;37m'
+COLOR_NONE='\033[0m' # No Color
+
+OK_TEXT="${COLOR_OK}ok${COLOR_NONE}"
+
+PROJECT_DIR=$PWD
+
+function git-sync {
+    printf "\n${COLOR_ACCENT}$PWD${COLOR_NONE}\n"
+
+    printf "  ${COLOR_STATUS}git status:${COLOR_NONE}\n    "
+    OUTPUT="$(git status --short)"
+    if [ "$OUTPUT" ]
+    then
+        printf "${COLOR_ERROR}dirty git directory${COLOR_NONE}\n"
+        git status
+        exit 1
+    fi
+    printf "ok\n"
+    #printf "$OK_TEXT\n"
+
+    printf "  ${COLOR_STATUS}git fetch --all:${COLOR_NONE}\n    "
+    git fetch --all
+
+    printf "  ${COLOR_STATUS}git checkout master --quiet:${COLOR_NONE}\n    "
+    git checkout master --quiet
+    printf "ok\n"
+    #printf "$OK_TEXT\n"
+
+    printf "  ${COLOR_STATUS}git merge --ff-only:${COLOR_NONE}\n    "
+    git merge --ff-only
+
+    if [ $WITH_PUSH ]
+    then
+        printf "  ${COLOR_STATUS}git push:${COLOR_NONE}\n    "
+        git push
+    fi
+
+}
+
+cd ../bindscript
+git-sync
+
+cd ../browser-headsup
+git-sync
+
+cd ../facts-db
+git-sync
+
+cd ../appkernel
+git-sync
+
+cd ../apptoolkit
+git-sync
+
+cd ../material-desktop
+git-sync
+
+
+cd $PROJECT_DIR
+git-sync
