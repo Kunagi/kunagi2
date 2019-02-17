@@ -1,6 +1,7 @@
 (ns kunagi.main
   (:require
    [appkernel.api :as app]
+   [apptoolkit.browserapp.api :as browserapp]
    [material-desktop.desktop :as desktop]
 
    [kunagi.events]
@@ -10,4 +11,4 @@
 
 (tap> ::loading)
 
-
+(def start browserapp/start)

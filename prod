@@ -1,8 +1,0 @@
-#!/bin/bash -e
-
-PORT=$1
-
-./build
-
-echo "Starting HTTP server on port $PORT"
-clojure -A:dev-deps:run $PORT

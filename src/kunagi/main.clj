@@ -7,7 +7,6 @@
    [kunagi.events]))
 
 
-(defn -main [port]
+(defn -main []
   (tap> ::main)
-  (app/assoc-in-db! [:http-server/port] (Integer/parseInt port))
-  (app/start!))
+  (app/start! {}))
