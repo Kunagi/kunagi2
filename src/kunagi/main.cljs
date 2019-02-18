@@ -1,14 +1,19 @@
 (ns kunagi.main
   (:require
-   [appkernel.api :as app]
    [apptoolkit.browserapp.api :as browserapp]
-   [material-desktop.desktop :as desktop]
+
+   [apptoolkit.devtools.headsup.mod]
 
    [kunagi.events]
    [kunagi.commands]
    [kunagi.pbl.projector]
-   [kunagi.pbl.ui :as pbl-ui]))
+   [kunagi.pbl.ui :as pbl-ui]
+   [kunagi.desktop :as desktop]))
 
-(tap> ::loading)
 
-(def start browserapp/start)
+(defn Root []
+  [desktop/Desktop])
+
+
+(defn ^:export start [config-edn]
+  (browserapp/start config-edn [Root]))

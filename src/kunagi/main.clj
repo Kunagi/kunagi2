@@ -8,5 +8,4 @@
 
 
 (defn -main []
-  (tap> ::main)
-  (app/start! {}))
+  (app/start! {:app/name "kunagi"}))

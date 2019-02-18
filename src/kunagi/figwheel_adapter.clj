@@ -2,6 +2,6 @@
   (:require
    [apptoolkit.http-server.figwheel-adapter :as figwheel-adapter]
 
-   [kunagi.main]))
+   [kunagi.main :as main]))
 
-(def ring-handler-for-figwheel figwheel-adapter/ring-handler-for-figwheel)
+(def ring-handler-for-figwheel (figwheel-adapter/ring-handler-for-figwheel main/-main))

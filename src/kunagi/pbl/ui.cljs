@@ -35,6 +35,7 @@
                   :on-click (-> pbl-item :on :delete)}]]]]))
 
 
+
 (defn ProductBacklog []
   (let [pbl @(rf/subscribe [::pbl])]
     [:div#ProductBacklog
@@ -49,24 +50,9 @@
       {:panels (map (fn [pbl-item]
                       {:pbl-item pbl-item
                        :summary {:text (:label pbl-item)}
-                       :details {:component ProductBacklogItemDetails}})
+                       :details {:component [ProductBacklogItemDetails]}})
                     (:items pbl))}]]))
 
-
-(defn Workarea []
-  [ProductBacklog])
-
-(defn install-page [db]
-  (-> db
-      (assoc-in [::desktop/desktop :appbar :title] "Some Product Backlog")
-      (assoc-in [::desktop/desktop :workarea :components :kunagi] [[Workarea]])))
-
-
-
-(app/def-event-handler ::install-page
-  :event :app/started
-  :f (fn [db event]
-       (install-page db)))
 
 
 ;;; subscriptions
@@ -77,6 +63,7 @@
   (let [id (get pbl-item :db/id)]
     (-> pbl-item
         (assoc-in [:on :delete]
+                  ;; #(js/window.alert "click")))))
                   #(rf/dispatch [:kunagi/delete-pbl-item {:item id}])))))
 
 
