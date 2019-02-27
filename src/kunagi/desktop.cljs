@@ -1,7 +1,6 @@
 (ns kunagi.desktop
   (:require
 
-   [apptoolkit.browserapp.api :refer [<subscribe]]
    [appkernel.api :as app]
    [material-desktop.desktop :as desktop]
 

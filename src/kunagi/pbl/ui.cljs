@@ -39,7 +39,9 @@
 (defn ProductBacklog []
   (let [pbl @(rf/subscribe [::pbl])]
     [:div#ProductBacklog
-     [:pre (str "pbl: " pbl)]
+     [:h4 "debug pbl:"]
+     [mdc/Data pbl]
+     [:hr]
      ;; [:pre (str "sub: " @(rf/subscribe [:app/projection-db {:name :kunagi/pbl :args {}}]))]
      [:div
       {:style {:margin-bottom "1rem"}}
@@ -47,11 +49,11 @@
        :on-click (-> pbl :on :create-pbl-item)
        :text "Add Product Backlog Item"]]
      [expansion-panel-list/ExpansionPanelList
-      {:panels (map (fn [pbl-item]
-                      {:pbl-item pbl-item
-                       :summary {:text (:label pbl-item)}
-                       :details {:component [ProductBacklogItemDetails]}})
-                    (:items pbl))}]]))
+      :panels (map (fn [pbl-item]
+                     {:pbl-item pbl-item
+                      :summary {:text (:label pbl-item)}
+                      :details {:component [ProductBacklogItemDetails]}})
+                   (:items pbl))]]))
 
 
 

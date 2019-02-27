@@ -18,7 +18,8 @@
 (defn on-pbl-item-created
   [db event]
   (tap> [::item-created db event])
-  (db/+++ db pbl-id :items (:item event)))
+  (db/++ db pbl-id :items (:item event))
+  db)
 
 
 (defn on-pbl-item-deleted
@@ -36,10 +37,10 @@
    {:event :app/started
     :db-f (fn [db event]
             (-> db
-                (db/+++ pbl-id :items [{:label "Initial Item 1"
-                                        :description "Description for first Product Backlog Item."}
-                                       {:label "Initial Item 2"
-                                        :description "Description for second Product Backlog Item."}])))}
+                (db/++ pbl-id :items [{:label "Initial Item 1"
+                                       :description "Description for first Product Backlog Item."}
+                                      {:label "Initial Item 2"
+                                       :description "Description for second Product Backlog Item."}])))}
 
    {:event :kunagi/pbl-item-created
     :doc "Add event's `:item` to pbl's `:items`."
