@@ -79,5 +79,5 @@ cd ../material-desktop
 git-sync
 
 
-cd $PROJECT_DIR
+cd "$PROJECT_DIR"
 git-sync
