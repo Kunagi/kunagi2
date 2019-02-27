@@ -18,8 +18,7 @@
 (defn on-pbl-item-created
   [db event]
   (tap> [::item-created db event])
-  (db/++ db pbl-id :items (:item event))
-  db)
+  (db/++ db pbl-id :items (:item event)))
 
 
 (defn on-pbl-item-deleted

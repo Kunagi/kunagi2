@@ -39,9 +39,13 @@
 (defn ProductBacklog []
   (let [pbl @(rf/subscribe [::pbl])]
     [:div#ProductBacklog
-     [:h4 "debug pbl:"]
-     [mdc/Data pbl]
-     [:hr]
+     ;; [:h4 "debug pbl:"]
+     ;; [mdc/Data pbl]
+     ;; [:hr]
+     ;; [mdc/Data @(rf/subscribe [:app/projection-db {:name :kunagi/pbl}])]
+     ;; [:hr]
+     ;; [mdc/Data (-> @(rf/subscribe [:app/db]) keys)]
+     ;; [:hr]
      ;; [:pre (str "sub: " @(rf/subscribe [:app/projection-db {:name :kunagi/pbl :args {}}]))]
      [:div
       {:style {:margin-bottom "1rem"}}
