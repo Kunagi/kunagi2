@@ -66,6 +66,9 @@ git-sync
 cd ../facts-db
 git-sync
 
+cd ../conform
+git-sync
+
 cd ../appkernel
 git-sync
 
