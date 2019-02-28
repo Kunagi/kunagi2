@@ -54,9 +54,9 @@
        :text "Add Product Backlog Item"]]
      [expansion-panel-list/ExpansionPanelList
       :panels (map (fn [pbl-item]
-                     {:pbl-item pbl-item
-                      :summary {:text (:label pbl-item)}
-                      :details {:component [ProductBacklogItemDetails]}})
+                     {:summary {:text (:label pbl-item)}
+                      :details {:component ProductBacklogItemDetails
+                                :pbl-item pbl-item}})
                    (:items pbl))]]))
 
 
