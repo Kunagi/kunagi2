@@ -1,5 +1,6 @@
 pom.xml
 pom.xml.asc
+config.edn
 *.jar
 *.class
 /lib/
@@ -12,4 +13,3 @@ pom.xml.asc
 .lein-failures
 .nrepl-port
 .cpcache/
-.config.edn
