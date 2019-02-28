@@ -8,6 +8,7 @@
                                "../apptoolkit/src"
                                "../bindscript/src"
                                "../browser-headsup/src"
+                               "../conform/src"
                                "../facts-db/src"
                                "../material-desktop/src"],
                  :main-opts ["--main" "figwheel.main" "--build" "dev"]},

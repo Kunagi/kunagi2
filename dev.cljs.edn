@@ -1,11 +1,10 @@
-^{:launch-js ["google-chrome" :open-url],
- :open-file-command "emacsclient",
- :ring-handler kunagi.figwheel-adapter/ring-handler-for-figwheel,
+^{:ring-handler kunagi.figwheel-adapter/ring-handler-for-figwheel,
  :watch-dirs ["src"
               "../appkernel/src"
               "../apptoolkit/src"
               "../bindscript/src"
               "../browser-headsup/src"
+              "../conform/src"
               "../facts-db/src"
               "../material-desktop/src"]}
 {:main kunagi.figwheel-adapter, :preloads [devtools.preload]}
