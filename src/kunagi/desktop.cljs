@@ -1,22 +1,24 @@
 (ns kunagi.desktop
   (:require
 
-   [appkernel.api :as app]
+   [material-desktop.components :as mdc]
    [material-desktop.desktop.components.desktop :as desktop]
 
-   [kunagi.pbl.ui :as pbl-ui]))
+   [domain-model-editor.components.desktop :as dme-editor]
+
+   [kunagi.pbl.ui :refer [ProductBacklog]]))
 
 
-(defn Workarea []
-  [pbl-ui/ProductBacklog])
+(defn create-page [title workarea-component]
+  {:appbar {:title [mdc/Double-DIV title "Kunagi"]}
+   :workarea {:components [[workarea-component]]}})
 
 
-(defn AppbarToolbar []
-  [:div])
+(def pages
+  {:kunagi/pbl  (create-page "Product Backlog" ProductBacklog)})
 
 
 (defn Desktop []
-  (desktop/Desktop
-   {:appbar {:title "Kunagi Product Backlog"
-             :toolbar-components [[AppbarToolbar]]}
-    :workarea {:components [[Workarea]]}}))
+  (desktop/PagedDesktop
+   {:pages pages
+    :home-page :kunagi/pbl}))

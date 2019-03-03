@@ -1,2 +1,3 @@
-{:own [kunagi/apptoolkit]
+{:own [kunagi/apptoolkit
+       kunagi/domain-model-editor]
  :foreign {}}

@@ -75,6 +75,12 @@ git-sync
 cd ../apptoolkit
 git-sync
 
+cd ../domain-model
+git-sync
+
+cd ../domain-model-editor
+git-sync
+
 cd ../material-desktop
 git-sync
 

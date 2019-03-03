@@ -5,6 +5,8 @@
               "../bindscript/src"
               "../browser-headsup/src"
               "../conform/src"
+              "../domain-model-editor/src"
+              "../domain-model/src"
               "../facts-db/src"
               "../material-desktop/src"]}
 {:main kunagi.figwheel-adapter, :preloads [devtools.preload]}
