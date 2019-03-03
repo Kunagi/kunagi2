@@ -5,7 +5,6 @@
 
    [appkernel.api :as app]
    [facts-db.api :as db]
-   [material-desktop.desktop :as desktop]
    [material-desktop.components :as mdc]
    [material-desktop.fieldset :as fieldset]
    [material-desktop.expansion-panel-list :as expansion-panel-list]))

@@ -2,7 +2,7 @@
   (:require
 
    [appkernel.api :as app]
-   [material-desktop.desktop :as desktop]
+   [material-desktop.desktop.components.desktop :as desktop]
 
    [kunagi.pbl.ui :as pbl-ui]))
 
@@ -17,6 +17,6 @@
 
 (defn Desktop []
   (desktop/Desktop
-   :appbar {:title "Kunagi Product Backlog"
-            :toolbar-components [[AppbarToolbar]]}
-   :workarea {:components [[Workarea]]}))
+   {:appbar {:title "Kunagi Product Backlog"
+             :toolbar-components [[AppbarToolbar]]}
+    :workarea {:components [[Workarea]]}}))
