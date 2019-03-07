@@ -23,6 +23,14 @@
     {:id "id-projection-product-backlog"
      :ident :product-backlog}]
 
+   [:projection-event-handler-created
+    {:projection-id "id-projection-product-backlog"
+     :event-id "id-event-product-backlog-item-added"}]
+
+   [:projection-event-handler-created
+    {:projection-id "id-projection-product-backlog"
+     :event-id "id-event-product-backlog-item-discarded"}]
+
    [:type-created
     {:id "id-type-product-backlog-item-estimation"
      :ident :product-backlog-item-estimation}]])
