@@ -1,9 +1,13 @@
 (ns kunagi.main
   (:require
-   [apptoolkit.browserapp.api :as browserapp]
+   [re-frame.core :as rf]
 
+   [apptoolkit.browserapp.api :as browserapp]
    [apptoolkit.devtools.headsup.mod]
 
+   [apptoolkit.domain-model-editor.mod]
+
+   [kunagi.domain-model-module :as domain-model-module]
    [kunagi.events]
    [kunagi.commands]
    [kunagi.pbl.projector]
@@ -16,4 +20,7 @@
 
 
 (defn ^:export start [config-edn]
-  (browserapp/start config-edn [Root]))
+  (browserapp/start
+   config-edn
+   [Root]
+   {:domain-model/modules-events {:kunagi domain-model-module/events}}))

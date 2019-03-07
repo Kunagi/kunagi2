@@ -18,7 +18,10 @@
 (defn on-pbl-item-created
   [db event]
   (tap> [::item-created db event])
-  (db/++ db pbl-id :items (:item event)))
+  ;;(db/++ db pbl-id :items (:item event))
+  (db/update-facts db
+                   [(-> (:item event)
+                        (conj :db/add-ref-1 [pbl-id :items]))]))
 
 
 (defn on-pbl-item-deleted

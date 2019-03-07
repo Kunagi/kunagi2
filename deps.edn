@@ -9,10 +9,9 @@
                                "../bindscript/src"
                                "../browser-headsup/src"
                                "../conform/src"
-                               "../domain-model-editor/src"
-                               "../domain-model/src"
                                "../facts-db/src"
-                               "../material-desktop/src"],
+                               "../material-desktop/src"
+                               "../model-driver/src"],
                  :main-opts ["--main" "figwheel.main" "--build" "dev"]},
            :prod-js {:extra-deps {com.bhauman/figwheel-main {:mvn/version "RELEASE"}},
                      :main-opts ["--main"
@@ -22,7 +21,6 @@
                                  "--build-once"
                                  "prod"]}},
  :deps {kunagi/apptoolkit {:local/root "../apptoolkit"},
-        kunagi/domain-model-editor {:local/root "../domain-model-editor"},
         org.clojure/clojure {:mvn/version "1.10.0"},
         org.clojure/clojurescript {:mvn/version "1.10.520"}},
  :paths ["src"]}
