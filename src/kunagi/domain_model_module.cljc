@@ -15,6 +15,17 @@
     {:id "id-event-product-backlog-item-added"
      :ident :product-backlog-item-added}]
 
+   [:event-attribute-created
+    {:event-id "id-event-product-backlog-item-added"
+     :ident :product-backlog
+     :type :domain-model.type/entity-reference
+     :entity "id-entity-product-backlog"}]
+
+   [:event-attribute-created
+    {:event-id "id-event-product-backlog-item-added"
+     :ident :label
+     :type :domain-model.type/text}]
+
    [:event-created
     {:id "id-event-product-backlog-item-discarded"
      :ident :product-backlog-item-discarded}]
