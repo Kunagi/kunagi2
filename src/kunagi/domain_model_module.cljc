@@ -17,4 +17,8 @@
 
    [:event-created
     {:id "id-event-product-backlog-item-discarded"
-     :ident :product-backlog-item-discarded}]])
+     :ident :product-backlog-item-discarded}]
+
+   [:projection-created
+    {:id "id-projection-product-backlog"
+     :ident :product-backlog}]])
