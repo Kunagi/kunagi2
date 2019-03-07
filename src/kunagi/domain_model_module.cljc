@@ -21,4 +21,8 @@
 
    [:projection-created
     {:id "id-projection-product-backlog"
-     :ident :product-backlog}]])
+     :ident :product-backlog}]
+
+   [:type-created
+    {:id "id-type-product-backlog-item-estimation"
+     :ident :product-backlog-item-estimation}]])
