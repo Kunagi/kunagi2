@@ -5,6 +5,7 @@
 
    [appkernel.api :as app]
    [facts-db.api :as db]
+   [material-desktop.api :refer [dispatch>]]
    [material-desktop.components :as mdc]
    [material-desktop.fieldset :as fieldset]
    [material-desktop.expansion-panel-list :as expansion-panel-list]))
@@ -19,11 +20,19 @@
       {:style {:flex-grow 1}}
       [fieldset/Fieldset
        :rows [{:fields [{:label "Label"
-                         :value (get pbl-item :label)}
+                         :value (get pbl-item :label)
+                         :on-click #(dispatch> [:kunagi/edit-entity-fact-triggered
+                                                {:entity-id (:db/id pbl-item)
+                                                 :fact :label
+                                                 :current-value (get pbl-item :label)}])}
                         {:label "Estimation"
                          :value "3 Story Points"}]}
               {:fields [{:label "Description"
-                         :value (get pbl-item :description)}]}
+                         :value (get pbl-item :description)
+                         :on-click #(dispatch> [:kunagi/edit-entity-fact-triggered
+                                                {:entity-id (:db/id pbl-item)
+                                                 :fact :description
+                                                 :current-value (get pbl-item :description)}])}]}
               {:fields [{:label "Requirements"}]}]]]
 
      [:div

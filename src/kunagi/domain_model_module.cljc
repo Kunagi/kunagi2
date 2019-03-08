@@ -2,6 +2,11 @@
 
 (def events
   [
+
+   [:type-created
+    {:id "id-type-label"
+     :ident :label}]
+
    [:entity-created
     {:id "id-entity-kunagi-instance"
      :ident :kunagi-instance}]

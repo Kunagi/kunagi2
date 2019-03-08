@@ -41,3 +41,9 @@
 
        {:db/id product-backlog-id
         [:db/rem-1 :items] id}])))
+
+
+(def-event ::entity-facts-updated
+  (fn [db {:keys [id facts]}]
+    [(merge facts
+            {:db/id id})]))
