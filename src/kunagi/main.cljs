@@ -9,18 +9,18 @@
 
    [kunagi.domain-model-module :as domain-model-module]
    [kunagi.events]
-   [kunagi.commands]
-   [kunagi.pbl.projector]
-   [kunagi.pbl.ui :as pbl-ui]
-   [kunagi.desktop :as desktop]))
+   [kunagi.subs]
+   [kunagi.projections.product-backlog]
+   [kunagi.components.desktop :refer [Desktop]]))
 
 
 (defn Root []
-  [desktop/Desktop])
+  [Desktop])
 
 
 (defn ^:export start [config-edn]
   (browserapp/start
    config-edn
    [Root]
-   {:domain-model/modules-events {:kunagi domain-model-module/events}}))
+   {:domain-model/modules-events {:kunagi domain-model-module/events}})
+  (rf/dispatch-sync [:kunagi/init]))

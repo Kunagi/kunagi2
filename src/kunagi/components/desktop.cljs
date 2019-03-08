@@ -1,4 +1,4 @@
-(ns kunagi.desktop
+(ns kunagi.components.desktop
   (:require
    ["@material-ui/core" :as mui]
 
@@ -8,7 +8,7 @@
 
    [apptoolkit.domain-model-editor.components.desktop :as dme-editor]
 
-   [kunagi.pbl.ui :refer [ProductBacklog]]))
+   [kunagi.components.product-backlog-page :refer [ProductBacklogWorkarea]]))
 
 
 (defn PblButton []
@@ -16,7 +16,7 @@
    {:style {:color :inherit}
     :on-click #(dispatch> [:material-desktop/desktop.page-switch-requested
                            {:page-key :app/home}])}
-   "Home"])
+   "Product Backlog"])
 
 
 (defn DmButton []
@@ -34,7 +34,7 @@
 (def pages
   (merge
    dme-editor/pages
-   {:app/home  (create-page "Product Backlog" ProductBacklog)}))
+   {:app/home  (create-page "Product Backlog" ProductBacklogWorkarea)}))
 
 
 (defn Desktop []

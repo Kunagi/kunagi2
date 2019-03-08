@@ -1,4 +1,4 @@
-(ns kunagi.pbl.ui
+(ns kunagi.components.product-backlog-page
   (:require
    [re-frame.core :as rf]
    ["@material-ui/icons" :as icons]
@@ -30,26 +30,20 @@
       {:style {:margin-left "2rem"}}
       [mdc/ButtonsColumn
        :title "Actions"
-       :buttons [{:text "Delete"
-                  :on-click (-> pbl-item :on :delete)}]]]]))
+       :buttons [{:text "discard"
+                  :on-click (-> pbl-item :on :discard)}]]]]))
 
 
 
-(defn ProductBacklog []
-  (let [pbl @(rf/subscribe [::pbl])]
+(defn ProductBacklogWorkarea []
+  (let [pbl @(rf/subscribe [:kunagi/product-backlog])]
     [:div#ProductBacklog
-     ;; [:h4 "debug pbl:"]
      ;; [mdc/Data pbl]
      ;; [:hr]
-     ;; [mdc/Data @(rf/subscribe [:app/projection-db {:name :kunagi/pbl}])]
-     ;; [:hr]
-     ;; [mdc/Data (-> @(rf/subscribe [:app/db]) keys)]
-     ;; [:hr]
-     ;; [:pre (str "sub: " @(rf/subscribe [:app/projection-db {:name :kunagi/pbl :args {}}]))]
      [:div
       {:style {:margin-bottom "1rem"}}
       [mdc/Button
-       :on-click (-> pbl :on :create-pbl-item)
+       :on-click (-> pbl :on :add-pbl-item)
        :text "Add Product Backlog Item"]]
      [expansion-panel-list/ExpansionPanelList
       :panels (map (fn [pbl-item]
@@ -58,33 +52,3 @@
                                 :pbl-item pbl-item}})
                    (:items pbl))]]))
 
-
-
-;;; subscriptions
-
-
-(defn assoc-handlers-to-pbl-item
-  [pbl-item]
-  (let [id (get pbl-item :db/id)]
-    (-> pbl-item
-        (assoc-in [:on :delete]
-                  ;; #(js/window.alert "click")))))
-                  #(rf/dispatch [:kunagi/delete-pbl-item {:item id}])))))
-
-
-(defn assoc-handlers-to-pbl
-  [pbl]
-  (-> pbl
-      (assoc-in [:on :create-pbl-item]
-                #(rf/dispatch [:kunagi/create-pbl-item]))
-      (update :items #(map assoc-handlers-to-pbl-item %))))
-
-(rf/reg-sub
- ::pbl
- (fn [_]
-   (rf/subscribe [:app/projection-db {:name :kunagi/pbl}]))
- (fn [projection-db _]
-   (let [pbl-id "some-random-pbl-id"]
-     ;; TODO tree-from-root
-     (-> (db/tree projection-db pbl-id {:items {}})
-         (assoc-handlers-to-pbl)))))
