@@ -14,7 +14,7 @@
 (defn PblButton []
   [:> mui/Button
    {:style {:color :inherit}
-    :on-click #(dispatch> [:material-desktop/activate-page
+    :on-click #(dispatch> [:material-desktop/desktop.page-switch-requested
                            {:page-key :app/home}])}
    "Home"])
 
@@ -22,7 +22,7 @@
 (defn DmButton []
   [:> mui/Button
    {:style {:color :inherit}
-    :on-click #(dispatch> [:material-desktop/activate-page
+    :on-click #(dispatch> [:material-desktop/desktop.page-switch-requested
                            {:page-key :domain-model-editor/model}])}
    "Domain Model"])
 
