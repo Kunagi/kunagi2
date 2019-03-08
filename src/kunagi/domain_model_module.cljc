@@ -3,8 +3,13 @@
 (def events
   [
    [:entity-created
+    {:id "id-entity-kunagi-instance"
+     :ident :kunagi-instance}]
+
+   [:entity-created
     {:id "id-entity-product-backlog"
-     :ident :product-backlog}]
+     :ident :product-backlog
+     :container-id "id-entity-kunagi-instance"}]
 
    [:entity-created
     {:id "id-entity-product-backlog-item"
