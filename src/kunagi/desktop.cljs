@@ -15,8 +15,8 @@
   [:> mui/Button
    {:style {:color :inherit}
     :on-click #(dispatch> [:material-desktop/activate-page
-                           {:page-key :kunagi/pbl}])}
-   "PBL"])
+                           {:page-key :app/home}])}
+   "Home"])
 
 
 (defn DmButton []
@@ -24,7 +24,7 @@
    {:style {:color :inherit}
     :on-click #(dispatch> [:material-desktop/activate-page
                            {:page-key :domain-model-editor/model}])}
-   "DM"])
+   "Domain Model"])
 
 (defn create-page [title workarea-component]
   {:appbar {:title [mdc/Double-DIV title "Kunagi"]}
@@ -34,11 +34,10 @@
 (def pages
   (merge
    dme-editor/pages
-   {:kunagi/pbl  (create-page "Product Backlog" ProductBacklog)}))
+   {:app/home  (create-page "Product Backlog" ProductBacklog)}))
 
 
 (defn Desktop []
   (desktop/PagedDesktop
    {:appbar {:toolbar-components [[PblButton] [DmButton]]}
-    :pages pages
-    :home-page :kunagi/pbl}))
+    :pages pages}))
