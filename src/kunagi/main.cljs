@@ -7,7 +7,8 @@
 
    [apptoolkit.domain-model-editor.mod]
 
-   [kunagi.scrum.domain-model-module :as domain-model-module]
+   [kunagi.scrum.domain-model-module :as scrum-domain]
+   [kunagi.browserapp.domain-model-module :as browserapp-domain]
    [kunagi.events]
    [kunagi.subs]
    [kunagi.scrum.projections.product-backlog]
@@ -22,5 +23,6 @@
   (browserapp/start
    config-edn
    [Root]
-   {:domain-model/modules-events {:scrum domain-model-module/events}})
+   {:domain-model/modules-events {:scrum      scrum-domain/events
+                                  :browserapp browserapp-domain/events}})
   (rf/dispatch-sync [:kunagi/init]))
