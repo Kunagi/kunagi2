@@ -13,7 +13,7 @@
  (fn [db _]
    (-> db
        (assoc :kunagi/dummy-product-backlog
-              (ddapi/new-db :kunagi.projection.product-backlog
+              (ddapi/new-db :scrum.projection.product-backlog
                             {:id "id-product-backlog-1"})))))
 
 

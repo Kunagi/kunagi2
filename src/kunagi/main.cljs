@@ -7,10 +7,10 @@
 
    [apptoolkit.domain-model-editor.mod]
 
-   [kunagi.domain-model-module :as domain-model-module]
+   [kunagi.scrum.domain-model-module :as domain-model-module]
    [kunagi.events]
    [kunagi.subs]
-   [kunagi.projections.product-backlog]
+   [kunagi.scrum.projections.product-backlog]
    [kunagi.components.desktop :refer [Desktop]]))
 
 
@@ -22,5 +22,5 @@
   (browserapp/start
    config-edn
    [Root]
-   {:domain-model/modules-events {:kunagi domain-model-module/events}})
+   {:domain-model/modules-events {:scrum domain-model-module/events}})
   (rf/dispatch-sync [:kunagi/init]))

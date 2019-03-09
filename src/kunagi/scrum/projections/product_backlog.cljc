@@ -1,4 +1,4 @@
-(ns kunagi.projections.product-backlog
+(ns kunagi.scrum.projections.product-backlog
   (:require
    [bindscript.api :refer [def-bindscript]]
    [facts-db.api :as db]
@@ -6,7 +6,7 @@
    [conform.api :as conform]))
 
 
-(def-api ::kunagi.projection.product-backlog
+(def-api ::scrum.projection.product-backlog
   :db-constructor
   (fn [{:keys [id]}]
     [{:db/id "root"
@@ -45,5 +45,6 @@
 
 (def-event ::entity-facts-updated
   (fn [db {:keys [id facts]}]
+    ;; TODO store only facts for known entities
     [(merge facts
             {:db/id id})]))
