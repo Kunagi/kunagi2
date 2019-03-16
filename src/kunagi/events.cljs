@@ -36,6 +36,14 @@
                [[:product-backlog-item-discarded
                  {:id id}]]))))
 
+(rf/reg-event-db
+ :kunagi/product-backlog-item-reordered
+ (fn [db [_ {:keys [id before-id]}]]
+    (-> db
+        (update :kunagi/dummy-product-Backlog
+                ddapi/events>
+                [[:product-backlog-item-reordered
+                  {:id id :before-id id}]]))))
 
 
 (rf/reg-event-db

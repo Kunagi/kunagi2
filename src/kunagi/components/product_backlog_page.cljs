@@ -59,5 +59,4 @@
                      {:summary {:text (:label pbl-item)}
                       :details {:component ProductBacklogItemDetails
                                 :pbl-item pbl-item}})
-                   (:items pbl))]]))
-
+                   (sort-by #(.indexOf (:order pbl) (:db/id %)) (:items pbl)))]]))
