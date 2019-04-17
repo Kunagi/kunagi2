@@ -43,7 +43,7 @@
         (update :kunagi/dummy-product-Backlog
                 ddapi/events>
                 [[:product-backlog-item-reordered
-                  {:id id :before-id id}]]))))
+                  {:id id :before-id before-id}]]))))
 
 
 (rf/reg-event-db

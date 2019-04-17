@@ -58,8 +58,6 @@
         {:db/id product-backlog-id
          :order (assoc order i1 (order i2) i2 (order i1))}])))
 
-
-
 (def-event ::entity-facts-updated
   (fn [db {:keys [id facts]}]
     ;; TODO store only facts for known entities

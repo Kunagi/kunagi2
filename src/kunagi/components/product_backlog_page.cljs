@@ -40,7 +40,9 @@
       [mdc/ButtonsColumn
        :title "Actions"
        :buttons [{:text "discard"
-                  :on-click (-> pbl-item :on :discard)}]]]]))
+                  :on-click (-> pbl-item :on :discard)}
+                 {:text "move up"}
+                 {:text "move down"}]]]]))
 
 
 
