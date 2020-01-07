@@ -1,2 +1,2 @@
-{:own [kunagi/apptoolkit]
+{:own [kunagi/kunagi-base-server]
  :foreign {}}

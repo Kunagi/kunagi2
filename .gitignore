@@ -3,6 +3,7 @@ pom.xml.asc
 config.edn
 *.jar
 *.class
+node_modules
 /lib/
 /classes/
 /target/
