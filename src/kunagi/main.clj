@@ -1,10 +1,22 @@
 (ns kunagi.main
   (:require
-   [appkernel.api :as app]
 
-   [apptoolkit.http-server.mod]))
+   [kunagi-base.logging.tap-formated]
+   [kunagi-base.enable-asserts]
+   [kunagi-base.appconfig.load-as-server]
+   [kunagi-base.appconfig.api :as appconfig]
 
+   [kunagi-base.modules.startup.api :as startup]
+
+   [kunagi.modules.kunagi.model]))
+
+
+(appconfig/set-default-config!
+ {:http-server/oauth {:google {:enabled? true}}
+  :browserapp/lang "en"})
 
 
 (defn -main []
-  (app/start! {:app/name "kunagi"}))
+  (startup/start!
+   {:app/info {:app-name "kunagi"
+               :app-label "Kunagi"}}))

@@ -2,42 +2,37 @@
   (:require
    ["@material-ui/core" :as mui]
 
-   [material-desktop.api :refer [dispatch>]]
-   [material-desktop.components :as mdc]
-   [material-desktop.desktop.components.desktop :as desktop]
-
-   [apptoolkit.domain-model-editor.components.desktop :as dme-editor]
-
-   [kunagi.components.product-backlog-page :refer [ProductBacklogWorkarea]]))
+   [kunagi-base-browserapp.modules.desktop.components :as desktop]
+   [kunagi-base-browserapp.components :as kbc]))
 
 
-(defn PblButton []
-  [:> mui/Button
-   {:style {:color :inherit}
-    :on-click #(dispatch> [:material-desktop/desktop.page-switch-requested
-                           {:page-key :app/home}])}
-   "Product Backlog"])
+(defn devutils? [] true)
 
 
-(defn DmButton []
-  [:> mui/Button
-   {:style {:color :inherit}
-    :on-click #(dispatch> [:material-desktop/desktop.page-switch-requested
-                           {:page-key :domain-model-editor/model}])}
-   "Domain Model"])
-
-(defn create-page [title workarea-component]
-  {:appbar {:title [mdc/Double-DIV title "Kunagi"]}
-   :workarea {:components [[workarea-component]]}})
+(defn HomeIcon []
+  [:a
+   {:href "/ui/"}
+   [:img
+    {:src "/img/frankenburg-orga-icon_192.png"
+     :width "32px"
+     :alt "Kunagi"}]])
 
 
-(def pages
-  (merge
-   dme-editor/pages
-   {:app/home  (create-page "Product Backlog" ProductBacklogWorkarea)}))
+(defn AppBar []
+  [:> mui/AppBar
+   [:> mui/Toolbar
+
+    [desktop/MainNavIconButtonSwitch
+     [HomeIcon]]
+
+    [:div
+     {:style {:flex-grow 1}}]
+
+    (into [:div
+           {:style {:display :flex}}]
+          [[kbc/CommAsyncStatusIndicator]])]])
 
 
 (defn Desktop []
-  (desktop/PagedDesktop
-   {:appbar {:toolbar-components [[PblButton] [DmButton]]}
-    :pages pages}))
+  [desktop/Desktop
+   {:app-bar [AppBar]}])

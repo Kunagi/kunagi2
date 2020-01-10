@@ -1,30 +1,34 @@
 (ns kunagi.main
   (:require
-   [re-frame.core :as rf]
 
-   [apptoolkit.browserapp.api :as browserapp]
-   [apptoolkit.devtools.headsup.mod]
+   [kunagi-base.logging.tap]
+   [kunagi-base.enable-asserts]
+   [kunagi-base-browserapp.appconfig.load-as-browserapp]
 
-   [apptoolkit.domain-model-editor.mod]
+   [kunagi-base.modules.startup.api :as startup]
 
-   [material-desktop.desktop.domain-model-module :as desktop-domain]
-   [kunagi.scrum.domain-model-module :as scrum-domain]
-   [kunagi.browserapp.domain-model-module :as browserapp-domain]
-   [kunagi.events]
-   [kunagi.subs]
-   [kunagi.scrum.projections.product-backlog]
+   [mui-commons.init :as init]
+
+   [kunagi.modules.kunagi.model]
    [kunagi.components.desktop :refer [Desktop]]))
 
 
-(defn Root []
-  [Desktop])
+(def VERSION 1)
 
 
-(defn ^:export start [config-edn]
-  (browserapp/start
-   config-edn
-   [Root]
-   {:domain-model/modules-events {:scrum scrum-domain/events
-                                  :desktop desktop-domain/events}})
-                                  ;;:browserapp browserapp-domain/events}})
-  (rf/dispatch-sync [:kunagi/init]))
+
+(defn mount-app []
+  (init/mount-app Desktop))
+
+
+(defn init []
+  (init/install-roboto-css)
+  (startup/start!
+   {:app/info {:app-name "kunagi"
+               :app-version (str "2." VERSION)
+               :app-label "Kunagi"}})
+  (mount-app))
+
+
+(defn shadow-after-load []
+  (mount-app))
