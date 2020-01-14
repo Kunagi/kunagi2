@@ -72,8 +72,6 @@
 (defn Scratchpad []
   (let [state @(rf/subscribe [::state])]
     [:div
-     [muic/Data state]
-     [:hr]
      [PublicScreen state]
      [:hr]
      [:div
@@ -83,8 +81,9 @@
       [ParticipantScreen state "p-1"]
       [ParticipantScreen state "p-2"]]
      [:hr]
-     [ModeratorScreen state]]))
-
+     [ModeratorScreen state]
+     [:hr]
+     [muic/Data state]]))
 
 (defn Workarea []
   [Scratchpad])
