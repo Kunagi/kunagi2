@@ -1,4 +1,4 @@
-(ns kunagi.modules.estimate.participants)
+(ns kunagi.participants)
 
 
 (defn new-state []

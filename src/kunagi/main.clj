@@ -7,8 +7,15 @@
    [kunagi-base.appconfig.api :as appconfig]
 
    [kunagi-base.modules.startup.api :as startup]
+   [kunagi-base.appmodel :refer [def-module]]
 
-   [kunagi.modules.kunagi.model]))
+   ;; load kunagi-base modules
+   [kunagi-base-server.modules.http-server.model]
+   [kunagi-base-server.modules.browserapp.model]))
+
+
+(def-module
+  {:module/id ::kunagi})
 
 
 (appconfig/set-default-config!

@@ -9,12 +9,26 @@
 
    [mui-commons.init :as init]
 
-   [kunagi.modules.kunagi.model]
-   [kunagi.components.desktop :refer [Desktop]]))
+   [kunagi.ui :refer [Desktop]]
 
+   [kunagi-base.appmodel :refer [def-module]]
+   [kunagi-base-browserapp.modules.desktop.model :refer [def-page]]
+
+   [kunagi.estimating-ui :as estimating-ui]))
 
 (def VERSION 1)
 
+
+(def-module
+  {:module/id ::kunagi})
+
+
+(def-page
+  {:page/id ::index-page
+   :page/ident :index
+   :page/module [:module/ident :kunagi]
+   :page/title-text "Kunagi"
+   :page/workarea [estimating-ui/Workarea]})
 
 
 (defn mount-app []
