@@ -14,7 +14,8 @@
    [kunagi-base.appmodel :refer [def-module]]
    [kunagi-base-browserapp.modules.desktop.model :refer [def-page]]
 
-   [kunagi.estimating-ui :as estimating-ui]))
+   [kunagi.estimating-ui :as estimating-ui]
+   [kunagi.kunagi-ui :as kunagi-ui]))
 
 (def VERSION 1)
 
@@ -28,7 +29,7 @@
    :page/ident :index
    :page/module [:module/ident :kunagi]
    :page/title-text "Kunagi"
-   :page/workarea [estimating-ui/Workarea]})
+   :page/workarea [kunagi-ui/Workarea]})
 
 
 (defn mount-app []

@@ -11,7 +11,7 @@
 
 (defn PublicScreen [state]
   [:div
-   [:h4 "public screen"]
+   [:h4 "public screen x"]
    (when-let [item (-> state estimating/current-item)]
      [muic/Stack
       [muic/Card
@@ -37,7 +37,7 @@
   [:div
    [:h4 "moderator screen"]
    [:> mui/Button
-    {:on-click #(rf/dispatch [::init])}
+    {:on-click #(rf/dispatch [:kunagi.kunagi-ui/init])}
     "Init"]
    (when-let [item (-> state estimating/current-item)]
      [:div
@@ -81,13 +81,12 @@
       [ParticipantScreen state "p-1"]
       [ParticipantScreen state "p-2"]]
      [:hr]
-     [ModeratorScreen state]
-     [:hr]
-     [muic/Data state]]))
+     [ModeratorScreen state]]))
 
-(defn Workarea []
-  [Scratchpad])
-
+(defn Debug []
+  [:div
+   [:h4 "estimating state"]
+   [muic/Data @(rf/subscribe [::state])]])
 
 
 (rf/reg-sub
@@ -95,11 +94,6 @@
  (fn [db]
    (get db ::state)))
 
-
-(rf/reg-event-db
- ::init
- (fn [db _]
-   (assoc db ::state (estimating/new-state))))
 
 
 (rf/reg-event-db
