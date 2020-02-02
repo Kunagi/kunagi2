@@ -1,4 +1,4 @@
-(ns kunagi.modules.estimate
+(ns kunagi.estimating-ui
   (:require
    [reagent.core :as r]
    [re-frame.core :as rf]
@@ -6,7 +6,7 @@
    ["@material-ui/icons" :as icons]
 
    [mui-commons.components :as muic]
-   [kunagi.modules.estimate.estimating :as estimating]))
+   [kunagi.estimating :as estimating]))
 
 
 (defn PublicScreen [state]

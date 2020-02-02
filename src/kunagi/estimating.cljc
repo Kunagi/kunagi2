@@ -1,4 +1,4 @@
-(ns kunagi.modules.estimate.estimating)
+(ns kunagi.estimating)
 
 
 (defn new-state []

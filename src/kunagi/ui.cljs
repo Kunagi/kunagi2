@@ -1,4 +1,4 @@
-(ns kunagi.components.desktop
+(ns kunagi.ui
   (:require
    ["@material-ui/core" :as mui]
 
@@ -6,24 +6,13 @@
    [kunagi-base-browserapp.components :as kbc]))
 
 
-(defn devutils? [] true)
-
-
-(defn HomeIcon []
-  [:a
-   {:href "/ui/"}
-   [:img
-    {:src "/img/frankenburg-orga-icon_192.png"
-     :width "32px"
-     :alt "Kunagi"}]])
-
 
 (defn AppBar []
   [:> mui/AppBar
    [:> mui/Toolbar
 
-    [desktop/MainNavIconButtonSwitch
-     [HomeIcon]]
+    [:div
+     "Kunagi Estimating"]
 
     [:div
      {:style {:flex-grow 1}}]
