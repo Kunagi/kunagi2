@@ -95,12 +95,17 @@
    (get db ::state)))
 
 
-
-(rf/reg-event-db
- ::participant-selected-estimation
- (fn [db [_ participant-id value]]
-   (update db ::state
-           estimating/participant-selected-estimation participant-id value)))
+(rf/reg-event-fx
+ :participant-selected-estimation
+ (fn [context [_ participant-id value]]
+   (let [db (get context :db)
+         event {:event-name :estimating/participant-selected-estimation
+                :room-id nil ;TODO
+                :participant-id participant-id
+                :value value}
+         db (update db ::state estimating/apply-event event)]
+     {:db db
+      :send-event-to-server event})))
 
 
 (rf/reg-event-db

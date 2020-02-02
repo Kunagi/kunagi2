@@ -43,3 +43,10 @@
    (-> db
        (assoc ::state (kunagi/new-state))
        (assoc ::estimating-ui/state (estimating/new-state)))))
+
+
+(rf/reg-event-db
+  ::event-from-server-received
+  (fn [db [_ event]]
+    (let [event-name (get event :event-name)]
+      db)))

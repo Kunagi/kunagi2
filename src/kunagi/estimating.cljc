@@ -40,9 +40,17 @@
 (defn estimations-revealed [state]
   (assoc state :estimations-revealed true))
 
-(defn participant-selected-estimation [state participant-id value]
+(defn on-participant-selected-estimation [state participant-id value]
   (assoc-in state [:estimations-by-participant-id participant-id] value))
 
+
+(defn apply-event [state {:keys [event-name] :as event}]
+  (case event-name
+    :estimating/participant-selected-estimation
+    (on-participant-selected-estimation state (get event :participant-id)
+                                              (get event :value))
+    (throw (ex-info (str "Unsupported event: " event-name)
+                    {:event event}))))
 
 (comment
   (def state (new-state))
