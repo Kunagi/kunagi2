@@ -94,7 +94,7 @@
  (fn [db]
    (get db ::state)))
 
-
+;; TODO extend this to other (currently *-db) events
 (rf/reg-event-fx
  :participant-selected-estimation
  (fn [context [_ participant-id value]]

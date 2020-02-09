@@ -44,6 +44,7 @@
   (assoc-in state [:estimations-by-participant-id participant-id] value))
 
 
+;; TODO other events
 (defn apply-event [state {:keys [event-name] :as event}]
   (case event-name
     :estimating/participant-selected-estimation
