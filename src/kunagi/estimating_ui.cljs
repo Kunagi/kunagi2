@@ -94,9 +94,9 @@
  (fn [db]
    (get db ::state)))
 
-;; TODO extend this to other (currently *-db) events
+
 (rf/reg-event-fx
- :participant-selected-estimation
+ ::participant-selected-estimation
  (fn [context [_ participant-id value]]
    (let [db (get context :db)
          event {:event-name :estimating/participant-selected-estimation
@@ -107,14 +107,23 @@
      {:db db
       :send-event-to-server event})))
 
-
-(rf/reg-event-db
+(rf/reg-event-fx
  ::estimation-started
- (fn [db _]
-   (update db ::state estimating/estimation-started)))
+ (fn [context _]
+   (let [db (get context :db)
+         event {:event-name :estimating/estimation-started
+                :room-id nil} ;TODO
+         db (update db ::state estimating/apply-event event)]
+     {:db db
+      :send-event-to-server event})))
 
 
-(rf/reg-event-db
+(rf/reg-event-fx
  ::estimations-revealed
- (fn [db _]
-   (update db ::state estimating/estimations-revealed)))
+ (fn [context _]
+   (let [db (get context :db)
+         event {:event-name :estimating/estimations-revealed
+                :room-id nil} ;TODO
+         db (update db ::state estimating/apply-event event)]
+     {:db db
+      :send-event-to-server event})))
