@@ -1,11 +1,13 @@
 (ns kunagi.main
   (:require
+   [re-frame.core :as rf]
 
    [kunagi-base.logging.tap]
    [kunagi-base.enable-asserts]
    [kunagi-base-browserapp.appconfig.load-as-browserapp]
 
    [kunagi-base.modules.startup.api :as startup]
+   [kunagi-base-browserapp.modules.comm-async.model]
 
    [mui-commons.init :as init]
 
@@ -42,7 +44,8 @@
    {:app/info {:app-name "kunagi"
                :app-version (str "2." VERSION)
                :app-label "Kunagi"}})
-  (mount-app))
+  (mount-app)
+  (rf/dispatch [:kunagi.kunagi-ui/init]))
 
 
 (defn shadow-after-load []

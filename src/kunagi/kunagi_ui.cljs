@@ -30,6 +30,13 @@
 ;;; re-frame
 
 
+(rf/reg-fx
+ :send-event-to-server
+ (fn [event]
+   (js/console.log "FX" :send-event-to-server event)
+   (rf/dispatch [:comm-async/send [:kunagi-base/event [:kunagi/client-event event]]])))
+
+
 (rf/reg-sub
  ::state
  (fn [db]
@@ -37,16 +44,18 @@
 
 
 
-(rf/reg-event-db
+(rf/reg-event-fx
  ::init
- (fn [db _]
-   (-> db
-       (assoc ::state (kunagi/new-state))
-       (assoc ::estimating-ui/state (estimating/new-state)))))
+ (fn [context _]
+   (let [db (get context :db)
+         device-id (random-uuid)
+         kunagi-state (kunagi/new-state)
+         db (-> db
+                (assoc ::device-id device-id)
+                (assoc ::state kunagi-state))
+         event {:event-name :kunagi/device-connected
+                :device-id device-id}]
+     {:db db
+      :send-event-to-server event})))
 
 
-(rf/reg-event-db
-  ::event-from-server-received
-  (fn [db [_ event]]
-    (let [event-name (get event :event-name)]
-      db)))

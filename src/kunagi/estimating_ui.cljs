@@ -36,9 +36,6 @@
 (defn ModeratorScreen [state]
   [:div
    [:h4 "moderator screen"]
-   [:> mui/Button
-    {:on-click #(rf/dispatch [:kunagi.kunagi-ui/init])}
-    "Init"]
    (when-let [item (-> state estimating/current-item)]
      [:div
       [:> mui/Button
@@ -127,3 +124,11 @@
          db (update db ::state estimating/apply-event event)]
      {:db db
       :send-event-to-server event})))
+
+
+(rf/reg-event-db
+ :kunagi/estimating-state-received
+ (fn [db [_ estimating-state]]
+   (js/console.log :estimating-state-received estimating-state)
+   (-> db
+       (assoc ::state estimating-state))))
