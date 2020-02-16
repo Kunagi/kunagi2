@@ -14,7 +14,7 @@
    [kunagi-base-server.modules.http-server.model]
    [kunagi-base-server.modules.browserapp.model]
 
-   [kunagi.estimating-server :as estimating-server]))
+   [kunagi.server-impl :as impl]))
 
 
 (def-module
@@ -32,7 +32,7 @@
   {:event-handler/id ::client-event-handler
    :event-handler/module [:module/ident :kunagi]
    :event-handler/event-ident :kunagi/client-event
-   :event-handler/f #(estimating-server/on-client-event %1 %2)})
+   :event-handler/f #(impl/on-client-event %1 %2)})
 
 
 (appconfig/set-default-config!
