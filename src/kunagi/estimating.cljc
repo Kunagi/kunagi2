@@ -2,7 +2,7 @@
 
 
 (defn new-state []
-  {:id (-> random-uuid str)
+  {:id "r-1" ;;(-> random-uuid str)
    :participants [{:id "p-1"
                    :name "Alice"}
                   {:id "p-2"
