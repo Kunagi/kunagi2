@@ -7,8 +7,7 @@
    [kunagi-base-browserapp.appconfig.load-as-browserapp]
 
    [kunagi-base.modules.startup.api :as startup]
-   [kunagi-base.modules.auth.model]
-   [kunagi-base-browserapp.modules.comm-async.model]
+   [kunagi-base-browserapp.modules.auth]
 
    [mui-commons.init :as init]
 

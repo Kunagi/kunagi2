@@ -38,7 +38,6 @@
  {:http-server/oauth {:google {:enabled? true}}
   :browserapp/lang "en"})
 
-
 (defn -main []
   (startup/start!
    {:app/info {:app-name "kunagi"

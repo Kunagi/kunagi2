@@ -5,6 +5,7 @@
    ["@material-ui/core" :as mui]
    ["@material-ui/icons" :as icons]
 
+   [mui-commons.api :refer [<subscribe]]
    [mui-commons.components :as muic]
    [kunagi-base-browserapp.modules.desktop.components :as desktop]
    [kunagi-base-browserapp.components :as kbc]
@@ -12,6 +13,8 @@
    [kunagi.kunagi :as kunagi]
    [kunagi.estimating-ui :as estimating-ui]))
 
+
+;;; index page
 
 (defn Debug []
   [:div
@@ -31,6 +34,46 @@
   [Workarea-i])
 
 
+
+;;; base
+
+
+(defn- user-name [user]
+  (if-let [n (-> user :user/name)]
+    n
+    (if-let [info (-> user :user/oauth-userinfo)]
+      (if-let [n (-> info :given_name)]
+        n
+        (if-let [n (-> info :email)]
+          n
+          (-> user (:user/id))))
+      (-> user (:user/id)))))
+
+
+(defn UserMenu [user]
+  [muic/DropdownMenu
+   {:button-text (user-name user)}
+   (fn [callback]
+     [
+      [:> mui/MenuItem
+       {:on-click #(do
+                     (callback)
+                     (set! (.-location js/window) "/sign-out"))}
+       "Logout"]])])
+
+
+(defn LoginButton []
+  [:> mui/Button
+   {:color :inherit
+    :on-click #(set! (.-location js/window) "/oauth/google")}
+   "Login"])
+
+
+(defn UserStatusForAppBar []
+  (if-let [user (<subscribe [:auth/user])]
+    [UserMenu user]
+    [LoginButton]))
+
 (defn AppBar []
   [:> mui/AppBar
    [:> mui/Toolbar
@@ -43,8 +86,8 @@
 
     (into [:div
            {:style {:display :flex}}]
-          [[kbc/CommAsyncStatusIndicator]])]])
-           ;[auth/UserStatusForAppBar]])]])
+          [[kbc/CommAsyncStatusIndicator]
+           [UserStatusForAppBar]])]])
 
 (defn Desktop []
   [desktop/Desktop
