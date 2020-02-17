@@ -7,17 +7,17 @@
    [kunagi-base-browserapp.appconfig.load-as-browserapp]
 
    [kunagi-base.modules.startup.api :as startup]
+   [kunagi-base.modules.auth.model]
    [kunagi-base-browserapp.modules.comm-async.model]
 
    [mui-commons.init :as init]
 
-   [kunagi.ui :refer [Desktop]]
 
    [kunagi-base.appmodel :refer [def-module]]
    [kunagi-base-browserapp.modules.desktop.model :refer [def-page]]
 
-   [kunagi.estimating-ui :as estimating-ui]
-   [kunagi.kunagi-ui :as kunagi-ui]))
+   [kunagi.ui :as ui]))
+
 
 (def VERSION 1)
 
@@ -27,15 +27,15 @@
 
 
 (def-page
-  {:page/id ::index-page
+  {:page/id ::index
    :page/ident :index
    :page/module [:module/ident :kunagi]
    :page/title-text "Kunagi"
-   :page/workarea [kunagi-ui/Workarea]})
+   :page/workarea [ui/Workarea]})
 
 
 (defn mount-app []
-  (init/mount-app Desktop))
+  (init/mount-app ui/Desktop))
 
 
 (defn init []
@@ -45,7 +45,7 @@
                :app-version (str "2." VERSION)
                :app-label "Kunagi"}})
   (mount-app)
-  (rf/dispatch [:kunagi.kunagi-ui/init]))
+  (rf/dispatch [:kunagi.ui/init]))
 
 
 (defn shadow-after-load []
