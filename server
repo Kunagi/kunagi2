@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+clojure -m kunagi.main
+

@@ -1,2 +1,2 @@
-{:own [kunagi/kunagi-base-server]
+{:own [kunagi/kunagi-base]
  :foreign {}}
